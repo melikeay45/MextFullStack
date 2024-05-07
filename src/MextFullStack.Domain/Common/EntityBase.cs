@@ -1,8 +1,6 @@
-﻿
-
-namespace MextFullStack.Domain.Common
+﻿namespace MextFullStack.Domain.Common
 {
-    public class EntityBase<TKey> where TKey : struct
+    public class EntityBase<TKey>
     {
         public TKey Id { get; set; }
         public DateTime CreatedOn { get; set; }

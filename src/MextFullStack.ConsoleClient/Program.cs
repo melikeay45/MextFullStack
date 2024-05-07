@@ -1,28 +1,61 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
+using MextFullStack.Domain;
 using MextFullStack.Domain.Entities;
+using MextFullStack.Domain.Enums;
+using System.Text;
 
-Console.WriteLine("Hello, World!");
 
-var customer = new Customer();
+var filePath = "C:\\Users\\Melike Aydın\\Desktop\\UNDPBootcamp\\BootcampBenimProjelerim\\MextFullStack\\AccessControlLogs.txt";
 
-customer.Id = "12345";
+var accessControlLogsText = File.ReadAllText(filePath);
 
-var franchiseRep = new FranchiseRepresentative();
+var accessControlLogLines = accessControlLogsText.Split("\n", StringSplitOptions.RemoveEmptyEntries);
 
-franchiseRep.Id = 1;
+List<AccessControlLog> accessControlLogs = new();
 
-var frienchise= new Franchise();
+//var accessControlLogs = new List<AccessControlLog>();
 
-frienchise.Id = Guid.NewGuid();
+foreach (var logLine in accessControlLogLines)
+{
+    var accessControlLogData = logLine.Split("---", StringSplitOptions.RemoveEmptyEntries);
 
-List<Customer> customers = new List<Customer>();
+    var accessControlLog = new AccessControlLog
+    {
+        Id = Guid.NewGuid(),
+        UserId = Convert.ToInt32(accessControlLogData[0]),
+        DeviceSerialNumber = accessControlLogData[1],
+        AccessType = Enum.Parse<AccessType>(accessControlLogData[2]),
+        Date = Convert.ToDateTime(accessControlLogData[3]),
+        CreatedOn = DateTime.Now
+    };
 
-List<Franchise> franchises = new List<Franchise>();
+    accessControlLogs.Add(accessControlLog);
 
-List<FranchiseRepresentative> franchiseRepresentatives = new List<FranchiseRepresentative>();
+    Console.WriteLine($"Reading -> Access Control Log: {logLine}");
+}
 
-Console.WriteLine(customer.CreatedOn.ToString());
+var random=new Random();
 
-Console.WriteLine(customer.Id.ToString());
+StringBuilder stringBuilder = new StringBuilder();
+
+foreach (var accessControlLog in accessControlLogs)
+{
+    var randomNumber = random.Next(0, 10000);
+
+    accessControlLog.IsApproved = randomNumber % 2 != 0;
+
+    accessControlLog.ApprovedDate = DateTime.Now;
+
+    var content = $"Writing -> Access Control Log: {accessControlLog.UserId}---{accessControlLog.DeviceSerialNumber}---{accessControlLog.AccessType}---{accessControlLog.Date}---{accessControlLog.IsApproved}---{accessControlLog.ApprovedDate}";
+
+    Console.WriteLine(content);
+
+    stringBuilder.AppendLine(content);
+}
+
+var savePath = "C:\\Users\\Melike Aydın\\Desktop\\UNDPBootcamp\\BootcampBenimProjelerim\\MextFullStack\\CheckedAccessControlLogs.txt";
+
+File.AppendAllText(savePath, stringBuilder.ToString());
 
 Console.ReadLine();
