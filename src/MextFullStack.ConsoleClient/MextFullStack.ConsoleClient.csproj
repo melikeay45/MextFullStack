@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MextFullStack.Domain\MextFullStack.Domain.csproj" />
+    <ProjectReference Include="..\MextFullStack.WebApi\MextFullStack.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
