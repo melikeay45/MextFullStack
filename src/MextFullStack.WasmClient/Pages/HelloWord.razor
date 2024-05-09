@@ -1,0 +1,19 @@
+﻿@page "/helloword"
+
+<h3>@Title</h3>
+
+<p>@Description</p>
+
+<button class="btn @ButtonCssClass" @onclick="ChangeColour">Change Colour</button>
+
+
+@code {
+    private string Title = "Hello World";
+    private string Description = "This is a simple page that says hello world.";
+    private string ButtonCssClass="btn-primary";
+
+    private void ChangeColour(MouseEventArgs args)
+    {
+        
+    }
+}

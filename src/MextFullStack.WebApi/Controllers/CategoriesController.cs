@@ -44,5 +44,28 @@ namespace MextFullStack.WebApi.Controllers
 
             return Ok(category.Id);
         }
+
+        [HttpPut]
+        public IActionResult Update(Category category)
+        {
+            if (category.Id == Guid.Empty)
+                return BadRequest("Gecersiz category id'si.");
+
+            if (FakeDatabase.Categories.Any(p => p.Name.ToLowerInvariant() == category.Name.ToLowerInvariant()
+                && p.Id != category.Id))
+                return BadRequest("Bu isimde bir category zaten mevcut.");
+
+            var categoryIndex = FakeDatabase.Categories.FindIndex(p => p.Id == category.Id);
+
+            if (categoryIndex == -1)
+                return NotFound("Guncellemek istediginiz category sistemde bulunamadi.");
+
+            category.ModifiedOn = DateTime.Now;
+
+            FakeDatabase.Categories[categoryIndex] = category;
+
+
+            return Ok(category.Id);
+        }
     }
 }

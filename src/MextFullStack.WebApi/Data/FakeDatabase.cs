@@ -44,7 +44,8 @@ namespace MextFullStack.WebApi.Data
                     Price = 999.99m,
                     Description = "The latest iPhone with advanced camera system.",
                     CreatedOn = DateTime.Now,
-                    CreatedByUserId = "user1"
+                    CreatedByUserId = "user1",
+                    CategoryId = new Guid("0c572969-ac45-497e-a369-f4073bb99713"),
                 },
                 new Product
                 {
@@ -53,7 +54,8 @@ namespace MextFullStack.WebApi.Data
                     Price = 599.99m,
                     Description = "Powerful and versatile iPad with a stunning display.",
                     CreatedOn = DateTime.Now,
-                    CreatedByUserId = "user2"
+                    CreatedByUserId = "user2",
+                    CategoryId = new Guid("e03b3678-aa08-40c2-bd9c-935c18940df2"),
                 },
                 new Product
                 {
@@ -62,7 +64,8 @@ namespace MextFullStack.WebApi.Data
                     Price = 799.99m,
                     Description = "A great iPhone with a beautiful design.",
                     CreatedOn = DateTime.Now,
-                    CreatedByUserId = "user1"
+                    CreatedByUserId = "user1",
+                    CategoryId = new Guid("0c572969-ac45-497e-a369-f4073bb99713")
                 },
                 new Product
                 {
@@ -71,7 +74,8 @@ namespace MextFullStack.WebApi.Data
                     Price = 1099.99m,
                     Description = "The most advanced iPad with a large screen.",
                     CreatedOn = DateTime.Now,
-                    CreatedByUserId = "user3"
+                    CreatedByUserId = "user3",
+                   CategoryId = new Guid("e03b3678-aa08-40c2-bd9c-935c18940df2")
                 },
                 new Product
                 {
@@ -80,7 +84,8 @@ namespace MextFullStack.WebApi.Data
                     Price = 399.99m,
                     Description = "A compact and affordable iPhone.",
                     CreatedOn = DateTime.Now,
-                    CreatedByUserId = "user2"
+                    CreatedByUserId = "user2",
+                    CategoryId = new Guid("0c572969-ac45-497e-a369-f4073bb99713")
                 }
             };
         }

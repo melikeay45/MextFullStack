@@ -1,4 +1,5 @@
-﻿using MextFullStack.Domain.Entities;
+﻿using MextFullStack.Domain.Dtos;
+using MextFullStack.Domain.Entities;
 using MextFullStack.WebApi.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace MextFullStack.WebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        public ProductGetAllDto ProductGetAllDto { get; set; }
 
         public ProductsController()
         {
@@ -19,7 +21,12 @@ namespace MextFullStack.WebApi.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(FakeDatabase.Products);
+            List<ProductGetAllDto> productDtos = FakeDatabase
+                .Products
+                .Select(p => ProductGetAllDto.FromProduct(p))
+                .ToList();
+
+            return Ok(productDtos);
         }
 
         [HttpGet("{id:guid}")]
@@ -32,7 +39,13 @@ namespace MextFullStack.WebApi.Controllers
             if (product == null)
                 return NotFound("Aradaginiz urun sistemde bulunamadi.");
 
-            return Ok(product);
+            var category = FakeDatabase
+                .Categories
+                .FirstOrDefault(c => c.Id == product.CategoryId);
+
+            var productDto = ProductGetByIdDto.FromProduct(product, category);
+
+            return Ok(productDto);
         }
 
         [HttpPost]
