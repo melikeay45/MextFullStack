@@ -7,7 +7,7 @@ namespace MextFullStackSaaS.Domain.Identity
     // AppUser / ApplicationUser
     public class User : IdentityUser<Guid>, IEntity<Guid>, ICreatedByEntity, IModifiedByEntity
     {
-        public string? FirsName { get; set; }
+        public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
 

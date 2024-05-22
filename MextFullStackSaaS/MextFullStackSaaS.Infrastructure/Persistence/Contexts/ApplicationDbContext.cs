@@ -9,9 +9,13 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IApplicationDbContext
     {
 
-        public ApplicationDbContext(DbContextOprtions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
+        }
+
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
         }
 
         public DbSet<Order> Orders { get; set; }
