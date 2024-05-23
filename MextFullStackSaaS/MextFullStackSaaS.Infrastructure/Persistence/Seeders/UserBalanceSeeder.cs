@@ -8,15 +8,16 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Seeders
     {
         public void Configure(EntityTypeBuilder<UserBalance> builder)
         {
-            var mextUserBalance = new UserBalance()
+            var mextUsersBalance = new UserBalance()
             {
-                Id = new Guid(),
-                UserId=new Guid(),
-                Credits=20,
+                Id = new Guid("8fccfc1c-baff-41f8-afc4-2b5b08bb8cf6"),
+                UserId = new Guid("35c16d2a-f25b-4701-9a74-ea1fb7ed6d93"),
+                Credits = 20,
                 CreatedOn = Convert.ToDateTime("2024-05-22T10:16:31+00:00"),
-                CreatedByUserId="",
+                CreatedByUserId = "35c16d2a-f25b-4701-9a74-ea1fb7ed6d93",
             };
-            builder.HasData(mextUserBalance);
+
+            builder.HasData(mextUsersBalance);
         }
     }
 }

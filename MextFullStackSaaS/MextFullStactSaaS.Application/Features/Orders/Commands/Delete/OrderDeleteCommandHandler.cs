@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using MextFullStactSaaS.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace MextFullStactSaaS.Application.Features.Orders.Commands.Delete
 {
-    internal class OrderDeleteCommandHandler
+    public class OrderDeleteCommandHandler : IRequestHandler<OrderDeleteCommand, Guid>
     {
+        private readonly IApplicationDbContext _dbContext;
+
+        public OrderDeleteCommandHandler(IApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public async Task<Guid> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
+        {
+            var order = await _dbContext
+                 .Orders
+                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+
+            _dbContext.Orders.Remove(order);
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return order.Id; // The selected order has been deleted successfully.
+        }
     }
 }
