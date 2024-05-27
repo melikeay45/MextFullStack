@@ -1,4 +1,5 @@
 using MextFullStackSaaS.Infrastructure;
+using MextFullStackSaaS.WebApi;
 using MextFullStackSaaS.WebApi.Services;
 using MextFullStactSaaS.Application.Common.Interfaces;
 
@@ -13,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddWebServices(builder.Configuration);
 
 var app = builder.Build();
 
