@@ -13,6 +13,6 @@ namespace MextFullStactSaaS.Application.Common.Interfaces
     {
         Task<UserAuthRegisterResponseDto> RegisterAsync(UserAuthRegisterCommand command, CancellationToken cancellationToken);
         Task<JwtDto> SignInAsync(UserAuthRegisterCommand command, CancellationToken cancellationToken);
-
+        Task<bool> IsEmailExistsAsync(string email, CancellationToken cancellationToken);
     }
 }

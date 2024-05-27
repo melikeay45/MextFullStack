@@ -6,6 +6,7 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
+
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             // Build configuration
@@ -22,7 +23,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
                   .UseNpgsql(connectionString);
 
             return new ApplicationDbContext(optionsBuilder.Options);
-
         }
     }
 }

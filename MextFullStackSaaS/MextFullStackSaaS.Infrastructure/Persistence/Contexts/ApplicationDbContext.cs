@@ -14,10 +14,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
 
         }
 
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
         public DbSet<Order> Orders { get; set; }
         public DbSet<UserBalance> UserBalances { get; set; }
         public DbSet<UserBalanceHistory> UserBalanceHistories { get; set; }
@@ -25,6 +21,8 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             
         }
     }

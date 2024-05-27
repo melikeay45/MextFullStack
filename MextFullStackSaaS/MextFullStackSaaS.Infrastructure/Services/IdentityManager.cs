@@ -31,9 +31,19 @@ namespace MextFullStackSaaS.Infrastructure.Services
             return new UserAuthRegisterResponseDto(user.Id, user.Email);
         }
 
-        public Task<JwtDto> SignInAsync(UserAuthRegisterCommand command, CancellationToken cancellationToken)
+        public async Task<JwtDto> SignInAsync(UserAuthRegisterCommand command, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsEmailExistsAsync(string email, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if(user is not null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
