@@ -1,15 +1,16 @@
 using MextFullstackSaaS.WebApi.Filters;
 using MextFullStackSaaS.Infrastructure;
-using MextFullStactSaaS.Application;
 using MextFullStackSaaS.WebApi;
+using MextFullStackSaaS.WebApi.Services;
+using MextFullStactSaaS.Application;
+using MextFullStactSaaS.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Builder;
+using Serilog;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
-    .WriteTo.File("C:\\Users\\beyza\\Desktop\\log.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("C:\\Users\\Melike Aydýn\\Desktop\\log.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 try
@@ -27,11 +28,6 @@ try
         opt.Filters.Add<GlobalExceptionFilter>();
     });
 
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
-
-
     builder.Services.AddApplication();
 
     builder.Services.AddInfrastructure(builder.Configuration);
@@ -43,6 +39,8 @@ try
         options.SuppressModelStateInvalidFilter = true;
     });
 
+    builder.Services.AddSingleton<IRootPathService>(new RootPathManager(builder.Environment.WebRootPath));
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -52,28 +50,27 @@ try
         app.UseSwaggerUI();
     }
 
-    //Bunu son derste ekledim
+    app.UseStaticFiles();
 
     var requestLocalizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
 
     app.UseRequestLocalization(requestLocalizationOptions.Value);
-    /////
-    
 
     app.UseHttpsRedirection();
+
+    app.UseAuthentication();
 
     app.UseAuthorization();
 
     app.MapControllers();
 
     app.Run();
-}
 
+}
 catch (Exception e)
 {
     Log.Fatal(e, "Application terminated unexpectedly");
 }
-
 finally
 {
     Log.CloseAndFlush();

@@ -6,7 +6,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             // Build configuration

@@ -1,10 +1,6 @@
-﻿using MextFullStactSaaS.Application.Common.FluentValidation.BaseValidators;
+﻿using FluentValidation;
+using MextFullStactSaaS.Application.Common.FluentValidation.BaseValidators;
 using MextFullStactSaaS.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MextFullStactSaaS.Application.Features.UserAuth.Commands.Login
 {

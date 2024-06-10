@@ -9,7 +9,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Seeders
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-
             var user = new User
             {
                 Id = new Guid("35c16d2a-f25b-4701-9a74-ea1fb7ed6d93"),

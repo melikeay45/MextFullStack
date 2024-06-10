@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
 {
-    public class UserLoginConfiguration:IEntityTypeConfiguration<UserLogin>
+    public class UserLoginConfiguration : IEntityTypeConfiguration<UserLogin>
     {
         public void Configure(EntityTypeBuilder<UserLogin> builder)
         {

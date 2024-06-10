@@ -13,28 +13,26 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<UserBalanceHistory> builder)
         {
-
             // ID
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
             // CurrentCredits
-            builder.Property(x => x.CurentCredits)
+            builder.Property(x => x.CurrentCredits)
                 .IsRequired();
 
             // PreviousCredits
             builder.Property(x => x.PreviousCredits)
                 .IsRequired();
-            
+
             // Amount
             builder.Property(x => x.Amount)
                 .IsRequired();
-            
+
             // Type
             builder.Property(x => x.Type)
                 .HasConversion<int>()
                 .IsRequired();
-            
 
             // Common Properties
 
@@ -56,13 +54,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
                 .IsRequired(false);
 
             // Relationships
-            //builder.HasOne<User>(x => x.User)
-            //    .WithMany(u => u.Orders)
-            //    .HasForeignKey(x => x.UserId);
-
-            //builder.HasMany<UserBalanceHistory>(x => x.Histories)
-            //    .WithOne(H => H.UserBalance)
-            //    .HasForeignKey(h => h.UserBalanceId);
 
             builder.ToTable("UserBalanceHistories");
         }

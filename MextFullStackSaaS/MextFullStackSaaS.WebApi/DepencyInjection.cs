@@ -1,7 +1,11 @@
 ﻿using MextFullStackSaaS.WebApi.Services;
 using MextFullStactSaaS.Application.Common.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Globalization;
+using System.Text;
 
 namespace MextFullStackSaaS.WebApi
 {
@@ -9,35 +13,30 @@ namespace MextFullStackSaaS.WebApi
     {
         public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //Çeviriler resources klasörü altında belirttik
             services.AddLocalization(options =>
             {
                 options.ResourcesPath = "Resources";
             });
 
-            //Varsayılan dili belirledik
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var defaultCalture = new CultureInfo("en-GB");
+                var defaultCulture = new CultureInfo("en-GB");
 
-                //Desteklenen dilleri belirttik
                 var supportedCultures = new List<CultureInfo>
                 {
-                    defaultCalture,
+                    defaultCulture,
                     new CultureInfo("tr-TR")
                 };
 
-                //Frontendden dil ayarı gönderilmezse ing cevap ver
-                options.DefaultRequestCulture = new RequestCulture(defaultCalture);
-
+                options.DefaultRequestCulture = new RequestCulture(defaultCulture);
 
                 options.SupportedCultures = supportedCultures;
 
                 options.SupportedUICultures = supportedCultures;
-                
-//Uygulama hangi dilde kullanılıyorsa cevaplarda bunu ilet
-options.ApplyCurrentCultureToResponseHeaders = true;
+
+                options.ApplyCurrentCultureToResponseHeaders = true;
             });
+
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(setupAction =>
@@ -74,18 +73,18 @@ options.ApplyCurrentCultureToResponseHeaders = true;
                 });
 
                 setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
                 {
-                    new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer",
-                        },
-                    }, new List<string>()
-                },
-            });
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer",
+                            },
+                        }, new List<string>()
+                    },
+                });
             });
 
             services.AddHttpContextAccessor();

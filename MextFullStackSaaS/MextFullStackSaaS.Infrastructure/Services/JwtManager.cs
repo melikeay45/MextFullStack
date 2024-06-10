@@ -1,7 +1,7 @@
-﻿using MextFullStackSaaS.Domain.Identity;
+﻿using MextFullStackSaaS.Application.Common.Models;
+using MextFullStackSaaS.Domain.Identity;
 using MextFullStackSaaS.Domain.Settings;
 using MextFullStactSaaS.Application.Common.Interfaces;
-using MextFullStactSaaS.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -11,10 +11,11 @@ using System.Text;
 
 namespace MextFullStackSaaS.Infrastructure.Services
 {
-    public class JwtManager:IJwtService
+    public class JwtManager : IJwtService
     {
         private readonly JwtSettings _jwtSettings;
         private readonly UserManager<User> _userManager;
+
         public JwtManager(IOptions<JwtSettings> jwtSettingsOptions, UserManager<User> userManager)
         {
             _userManager = userManager;
@@ -29,14 +30,15 @@ namespace MextFullStackSaaS.Infrastructure.Services
         public Task<JwtDto> GenerateTokenAsync(Guid userId, string email, CancellationToken cancellationToken)
         {
             var expirationTime = DateTime.Now.AddMinutes(_jwtSettings.AccessTokenExpirationInMinutes);
+
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Email,email),
+                new Claim(JwtRegisteredClaimNames.Email, email),
                 new Claim("uid",userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iss,_jwtSettings.Issuer),
                 new Claim(JwtRegisteredClaimNames.Aud,_jwtSettings.Audience),
-                new Claim(JwtRegisteredClaimNames.Iat,DateTime.Now.ToFileTimeUtc().ToString()), 
+                new Claim(JwtRegisteredClaimNames.Iat,DateTime.Now.ToFileTimeUtc().ToString()),
                 new Claim(JwtRegisteredClaimNames.Exp,expirationTime.ToFileTimeUtc().ToString()),
             };
 

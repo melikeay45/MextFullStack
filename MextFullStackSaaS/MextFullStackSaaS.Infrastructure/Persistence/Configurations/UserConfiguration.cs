@@ -23,7 +23,7 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
             // Limit the size of columns to use efficient database types
             builder.Property(u => u.UserName).HasMaxLength(100);
             builder.Property(u => u.NormalizedUserName).HasMaxLength(100);
-            
+
             //Email
             builder.Property(u => u.Email).IsRequired();
             builder.HasIndex(user => user.Email).IsUnique();
@@ -50,11 +50,12 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
-            // Each User can have many 
-            builder.HasMany<Order>(x=>x.Orders)
-                .WithOne(o=>o.User).HasForeignKey(x => x.UserId);
+            // Each User can have many Orders
+            builder.HasMany<Order>(x => x.Orders)
+                .WithOne(o => o.User)
+                .HasForeignKey(x => x.UserId);
 
-            //Common Properties
+            // Common Properties
 
             // CreatedDate
             builder.Property(x => x.CreatedOn).IsRequired();
@@ -72,7 +73,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
             builder.Property(user => user.ModifiedByUserId)
                 .HasMaxLength(100)
                 .IsRequired(false);
-
 
 
             builder.ToTable("Users");

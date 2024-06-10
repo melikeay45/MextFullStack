@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 namespace MextFullStackSaaS.WebApi.Services
 {
-    public class CurrentUserManager:ICurrentUserService
+    public class CurrentUserManager : ICurrentUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -12,8 +12,8 @@ namespace MextFullStackSaaS.WebApi.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public Guid UserId => new("");
-        //public Guid UserId => GetUserId();
+        // public Guid UserId => new("35c16d2a-f25b-4701-9a74-ea1fb7ed6d93");
+        public Guid UserId => GetUserId();
 
         private Guid GetUserId()
         {

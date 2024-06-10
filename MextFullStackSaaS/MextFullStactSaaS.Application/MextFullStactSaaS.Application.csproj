@@ -33,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\UserAuth\Commands\VerifyEmail\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources\Common\Translations\CommonTranslations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

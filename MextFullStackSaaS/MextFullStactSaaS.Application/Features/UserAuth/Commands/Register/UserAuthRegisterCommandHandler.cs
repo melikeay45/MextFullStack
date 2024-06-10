@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using MextFullStackSaaS.Application.Common.Models;
 using MextFullStactSaaS.Application.Common.Interfaces;
-using MextFullStactSaaS.Application.Common.Models;
+using MextFullStackSaaS.Application.Common.Models;
 using MextFullStactSaaS.Application.Common.Models.Emails;
 using MextFullStactSaaS.Application.Common.Translations;
 using Microsoft.Extensions.Localization;
@@ -15,8 +14,7 @@ namespace MextFullStactSaaS.Application.Features.UserAuth.Commands.Register
         private readonly IEmailService _emailService;
         private readonly IStringLocalizer<CommonTranslations> _localizer;
 
-
-        public UserAuthRegisterCommandHandler(IIdentityService identityService, IJwtService jwtService, IEmailService emailService,IStringLocalizer<CommonTranslations> localizer)
+        public UserAuthRegisterCommandHandler(IIdentityService identityService, IJwtService jwtService, IEmailService emailService, IStringLocalizer<CommonTranslations> localizer)
         {
             _identityService = identityService;
             _jwtService = jwtService;

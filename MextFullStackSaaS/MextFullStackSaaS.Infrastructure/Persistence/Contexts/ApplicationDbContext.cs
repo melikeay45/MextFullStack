@@ -8,7 +8,6 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IApplicationDbContext
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
@@ -18,12 +17,15 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Contexts
         public DbSet<UserBalance> UserBalances { get; set; }
         public DbSet<UserBalanceHistory> UserBalanceHistories { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            //builder.ApplyConfiguration(new OrderConfiguration());
+            //builder.ApplyConfiguration(new UserBalanceConfiguration());
+            //builder.ApplyConfiguration(new UserBalanceHistoryConfiguration());
+
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-            
         }
     }
 }

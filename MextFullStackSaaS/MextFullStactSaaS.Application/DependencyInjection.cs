@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MextFullStactSaaS.Application.Common.Behaviour;
+using MextFullStactSaaS.Application.Common.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation;

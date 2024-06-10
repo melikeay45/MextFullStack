@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
 {
-    public class OrderConfiguration:IEntityTypeConfiguration<Order>
+    public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
@@ -19,6 +19,11 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
             builder.Property(x => x.IconDescription)
                 .HasMaxLength(200)
                 .IsRequired();
+
+            // Description
+            builder.Property(x => x.Description)
+                .HasMaxLength(1000)
+                .IsRequired(false);
 
             // ColourCode
             builder.Property(x => x.ColourCode)

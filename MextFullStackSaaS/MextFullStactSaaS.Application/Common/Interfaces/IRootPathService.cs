@@ -1,7 +1,7 @@
 ﻿namespace MextFullStactSaaS.Application.Common.Interfaces
 {
-    public interface ICurrentUserService
+    public interface IRootPathService
     {
-        Guid UserId { get; }
+        string GetRootPath();
     }
 }

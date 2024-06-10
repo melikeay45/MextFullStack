@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
 {
-    public class UserTokenConfiguration:IEntityTypeConfiguration<UserToken>
+    public class UserTokenConfiguration : IEntityTypeConfiguration<UserToken>
     {
         public void Configure(EntityTypeBuilder<UserToken> builder)
         {

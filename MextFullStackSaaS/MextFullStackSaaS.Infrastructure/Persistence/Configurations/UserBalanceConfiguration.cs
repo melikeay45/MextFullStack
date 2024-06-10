@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
 {
-    public class UserBalanceConfiguration: IEntityTypeConfiguration<UserBalance>
+    public class UserBalanceConfiguration : IEntityTypeConfiguration<UserBalance>
     {
         public void Configure(EntityTypeBuilder<UserBalance> builder)
         {
@@ -47,7 +47,7 @@ namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
             //    .HasForeignKey(x => x.UserId);
 
             builder.HasMany<UserBalanceHistory>(x => x.Histories)
-                .WithOne(H => H.UserBalance)
+                .WithOne(h => h.UserBalance)
                 .HasForeignKey(h => h.UserBalanceId);
 
             builder.ToTable("UserBalances");

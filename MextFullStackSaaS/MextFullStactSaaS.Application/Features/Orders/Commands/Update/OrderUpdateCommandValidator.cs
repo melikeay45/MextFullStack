@@ -1,10 +1,6 @@
 ﻿using FluentValidation;
 using MextFullStactSaaS.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace MextFullStactSaaS.Application.Features.Orders.Commands.Update
 {

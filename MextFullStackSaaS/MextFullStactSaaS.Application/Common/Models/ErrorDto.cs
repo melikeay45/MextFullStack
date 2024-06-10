@@ -8,13 +8,14 @@ namespace MextFullStackSaaS.Application.Common.Models
 {
     public class ErrorDto
     {
-        public string PropertyName { get; set; }    
-        public List<string> Message { get; set; }
+        public string PropertyName { get; set; }
+        public List<string> Messages { get; set; }
 
-        public ErrorDto(string propertName, List<string> message)
+        public ErrorDto(string propertyName, List<string> messages)
         {
-            PropertyName=propertName;   
-            Message = message;  
+            PropertyName = propertyName;
+
+            Messages = messages;
         }
     }
 }

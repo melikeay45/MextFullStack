@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MextFullStackSaaS.Infrastructure.Persistence.Configurations
 {
-    public class UserClaimConfiguration:IEntityTypeConfiguration<UserClaim>
+    public class UserClaimConfiguration : IEntityTypeConfiguration<UserClaim>
     {
         public void Configure(EntityTypeBuilder<UserClaim> builder)
         {

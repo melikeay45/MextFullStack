@@ -16,7 +16,5 @@ namespace MextFullStackSaaS.Domain.Entities
         public int Credits { get; set; }
 
         public ICollection<UserBalanceHistory> Histories { get; set; }
-
-
     }
 }
