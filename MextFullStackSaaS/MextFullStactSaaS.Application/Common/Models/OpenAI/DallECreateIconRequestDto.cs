@@ -1,19 +1,16 @@
-﻿using MediatR;
-using MextFullStackSaaS.Application.Common.Models;
-using MextFullStackSaaS.Domain.Common;
-using MextFullStackSaaS.Domain.Entities;
-using MextFullStackSaaS.Domain.Enums;
+﻿using MextFullStackSaaS.Domain.Enums;
+using MextFullStactSaaS.Application.Features.Orders.Commands.Add;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MextFullStactSaaS.Application.Features.Orders.Commands.Add
+namespace MextFullStactSaaS.Application.Common.Models.OpenAI
 {
-    public class OrderAddCommand : IRequest<ResponseDto<Guid>>
+    public class DallECreateIconRequestDto
     {
-        public string IconDescription { get; set; }
+        public string Description { get; set; }
         public string ColourCode { get; set; }
         public AIModelType Model { get; set; }
         public DesignType DesignType { get; set; }
@@ -21,19 +18,17 @@ namespace MextFullStactSaaS.Application.Features.Orders.Commands.Add
         public IconShape Shape { get; set; }
         public int Quantity { get; set; }
 
-        public static Order MapToOrder(OrderAddCommand orderAddCommand)
+        public static DallECreateIconRequestDto MapFromOrderAddCommand(OrderAddCommand orderAddCommand)
         {
-            return new Order
+            return new DallECreateIconRequestDto
             {
-                Id = Guid.NewGuid(),
-                IconDescription = orderAddCommand.IconDescription,
+                Description = orderAddCommand.IconDescription,
                 ColourCode = orderAddCommand.ColourCode,
                 Model = orderAddCommand.Model,
                 DesignType = orderAddCommand.DesignType,
                 Size = orderAddCommand.Size,
                 Shape = orderAddCommand.Shape,
-                Quantity = orderAddCommand.Quantity,
-                CreatedOn = DateTimeOffset.UtcNow,
+                Quantity = orderAddCommand.Quantity
             };
         }
     }

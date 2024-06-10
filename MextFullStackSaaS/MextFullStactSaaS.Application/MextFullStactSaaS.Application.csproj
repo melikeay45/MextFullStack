@@ -7,14 +7,41 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.9.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <Compile Remove="Common\Translations\CommonTranslationKeys.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Common\Translations\CommonTranslations.en-GB.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Common\Translations\CommonTranslationKeys.cs" />
+    <None Include="Resources\Common\Translations\CommonTranslations.en-GB.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonTranslations.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MextFullStackSaaS.Domain\MextFullStackSaaS.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\UserAuth\Commands\VerifyEmail\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Common\Translations\CommonTranslations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommonTranslations.en-GB.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

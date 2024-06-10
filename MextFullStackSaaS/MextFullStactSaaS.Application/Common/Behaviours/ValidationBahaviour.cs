@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace MextFullStactSaaS.Application.Common.Behaviour
+namespace MextFullStactSaaS.Application.Common.Behaviours
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-      where TRequest : notnull
+       where TRequest : notnull
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 

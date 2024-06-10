@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MextFullStackSaaS.Application.Common.Models
+﻿namespace MextFullStackSaaS.Application.Common.Models
 {
     public class ResponseDto<T>
     {
@@ -15,27 +9,34 @@ namespace MextFullStackSaaS.Application.Common.Models
             Errors = new();
             Data = data;
         }
-        
-        public ResponseDto(T data,string message)
+
+        public ResponseDto(T data, string message)
         {
             Succeeded = true;
             Message = message;
             Errors = new();
             Data = data;
         }
+
         public ResponseDto(string message, List<ErrorDto> errors)
         {
             Succeeded = false;
             Message = message;
             Errors = errors;
             Data = default;
-        } 
-        public ResponseDto(string message, bool succeded)
+        }
+
+        public ResponseDto(string message, bool succeeded)
         {
-            Succeeded = succeded;
+            Succeeded = succeeded;
             Message = message;
             Errors = new();
             Data = default;
+        }
+
+        public ResponseDto()
+        {
+            Errors = new();
         }
 
         public bool Succeeded { get; set; }

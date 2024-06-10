@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MextFullStactSaaS.Application.Common.Interfaces;
 using MextFullStackSaaS.Application.Common.Models;
+using MextFullStactSaaS.Application.Common.Models.OpenAI;
 
 namespace MextFullStactSaaS.Application.Features.Orders.Commands.Add
 {
@@ -8,18 +9,24 @@ namespace MextFullStactSaaS.Application.Features.Orders.Commands.Add
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IOpenAIService _openAiService;
 
-        public OrderAddCommandHandler(IApplicationDbContext dbContext, ICurrentUserService currentUserService)
+        public OrderAddCommandHandler(IApplicationDbContext dbContext, ICurrentUserService currentUserService, IOpenAIService openAiService)
         {
             _dbContext = dbContext;
             _currentUserService = currentUserService;
+            _openAiService = openAiService;
         }
 
         public async Task<ResponseDto<Guid>> Handle(OrderAddCommand request, CancellationToken cancellationToken)
         {
             var order = OrderAddCommand.MapToOrder(request);
 
+            order.UserId = _currentUserService.UserId;
             order.CreatedByUserId = _currentUserService.UserId.ToString();
+            order.Urls =
+                await _openAiService.DallECreateIconAsync(DallECreateIconRequestDto.MapFromOrderAddCommand(request),
+                    cancellationToken);
 
             /* TODO: Make Request to the Gemine or Dall-e 3 */
 

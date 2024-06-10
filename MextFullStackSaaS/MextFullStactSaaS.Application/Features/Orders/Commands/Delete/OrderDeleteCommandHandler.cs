@@ -1,11 +1,12 @@
 ﻿using MediatR;
+using MextFullStackSaaS.Application.Common.Models;
 using MextFullStactSaaS.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace MextFullStactSaaS.Application.Features.Orders.Commands.Delete
 {
-    public class OrderDeleteCommandHandler : IRequestHandler<OrderDeleteCommand, Guid>
+    public class OrderDeleteCommandHandler : IRequestHandler<OrderDeleteCommand, ResponseDto<Guid>>
     {
         private readonly IApplicationDbContext _dbContext;
 
@@ -14,7 +15,7 @@ namespace MextFullStactSaaS.Application.Features.Orders.Commands.Delete
             _dbContext = dbContext;
         }
 
-        public async Task<Guid> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<Guid>> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
         {
             var order = await _dbContext
                  .Orders
@@ -24,7 +25,7 @@ namespace MextFullStactSaaS.Application.Features.Orders.Commands.Delete
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return order.Id; // The selected order has been deleted successfully.
+            return new ResponseDto<Guid>(order.Id, "Order deleted successfully.");
         }
     }
 }
